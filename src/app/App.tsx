@@ -1,11 +1,15 @@
-import Header from '@/shared/ui/Header'
+import { Header } from '@/layout'
 import { Outlet } from 'react-router-dom'
+import { ImagesBackground } from '@/layout/HeroSection/components/ImagesBackground'
 
 function App() {
 	return (
-		<div className=''>
+		<div className='relative min-h-screen'>
+			<ImagesBackground />
 			<Header />
-			<Outlet />
+			<main>
+				<Outlet />
+			</main>
 		</div>
 	)
 }

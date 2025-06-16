@@ -11,3 +11,5 @@ export const ROUTES = {
 // 		params: PathParams
 // 	}
 // }
+
+export type RouteValue = (typeof ROUTES)[keyof typeof ROUTES]

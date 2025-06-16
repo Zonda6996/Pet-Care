@@ -8,7 +8,7 @@ export const router = createBrowserRouter([
 		children: [
 			{
 				path: ROUTES.HOME,
-				lazy: () => import('@/pages/HomePage'),
+				lazy: () => import('@/pages/HomePage/HomePage.tsx'),
 			},
 		],
 	},
