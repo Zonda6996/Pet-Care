@@ -1,6 +1,5 @@
-import { Header } from '@/layout'
+import { Header, ImagesBackground } from '@/layout'
 import { Outlet } from 'react-router-dom'
-import { ImagesBackground } from '@/layout/HeroSection/components/ImagesBackground'
 
 function App() {
 	return (
