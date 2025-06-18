@@ -3,7 +3,7 @@ import { PawPrintIcon, WrenchIcon } from 'lucide-react'
 
 export const HeroSection = () => {
 	return (
-		<section className='font-[Montserrat] relative min-h-screen flex flex-col justify-start items-center pt-[90px]'>
+		<section className='font-[Montserrat] relative min-h-screen flex flex-col justify-start items-center pt-[90px] px-3'>
 			<div className='text-center text-white space-y-8 pt-[5vh]'>
 				<h1 className=' text-4xl font-extrabold '>
 					Найдите лучший план для своих животных

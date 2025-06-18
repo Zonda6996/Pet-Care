@@ -15,7 +15,7 @@ import { ServicesCard } from './ServicesCard'
 export const ServicesCards = () => {
 	return (
 		<>
-			<div className='flex gap-10 flex-wrap px-3 justify-center'>
+			<div className='flex gap-10 flex-wrap justify-center'>
 				<ServicesCard
 					IconComponent={HeartPulseIcon}
 					className='hover:shadow-red-500 hover:shadow-2xl/60'
