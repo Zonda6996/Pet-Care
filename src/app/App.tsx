@@ -1,11 +1,26 @@
-import { Header, ImagesBackground } from '@/layout'
-import { Outlet } from 'react-router-dom'
+import { HeaderContainer, ImagesBackground } from '@/layout'
+import { ROUTES } from '@/shared/routes/routes'
+import clsx from 'clsx'
+import { Outlet, useLocation } from 'react-router-dom'
 
 function App() {
+	const location = useLocation()
+	const isAuthPage =
+		location.pathname === ROUTES.LOGIN ||
+		location.pathname === ROUTES.REGISTER ||
+		location.pathname === ROUTES.RESET_PASSWORD
+
+	const mainPage = location.pathname === ROUTES.HOME
+	console.log('123')
+
+	const appClasses = clsx('relative min-h-screen bg-light-gray-bg z-0', {
+		'bg-white': isAuthPage,
+	})
+
 	return (
-		<div className='relative min-h-screen bg-light-gray-bg z-0'>
-			<ImagesBackground />
-			<Header />
+		<div className={appClasses}>
+			{!isAuthPage && <HeaderContainer />}
+			{mainPage && <ImagesBackground />}
 			<main className='max-w-[1380px] mx-auto flex flex-col'>
 				<Outlet />
 			</main>
