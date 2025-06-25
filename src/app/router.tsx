@@ -30,8 +30,20 @@ export const router = createBrowserRouter([
 				lazy: () => import('@/pages/AuthPage/ResetPasswordPage.tsx'),
 			},
 			{
+				path: ROUTES.CHOOSE_ANIMAL,
+				hydrateFallbackElement: <PageLoader />,
+				lazy: () => import('@/pages/ChooseAnimalPage/ChooseAnimalPage.tsx'),
+			},
+			{
+				path: ROUTES.CHOOSE_ANIMAL_CATEGORY,
+				hydrateFallbackElement: <PageLoader />,
+				lazy: () =>
+					import('@/pages/ChooseAnimalPage/ChooseAnimalCategoryPage.tsx'),
+			},
+			{
 				path: '*',
-				element: <div style={{ color: 'red' }}>Маршрут не найден</div>,
+				HydrateFallback: () => null,
+				lazy: () => import('@/pages/NotFoundPage/NotFoundPage.tsx'),
 			},
 
 			{

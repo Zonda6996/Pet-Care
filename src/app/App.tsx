@@ -10,8 +10,7 @@ function App() {
 		location.pathname === ROUTES.REGISTER ||
 		location.pathname === ROUTES.RESET_PASSWORD
 
-	const mainPage = location.pathname === ROUTES.HOME
-	console.log('123')
+	const homePage = location.pathname === ROUTES.HOME
 
 	const appClasses = clsx('relative min-h-screen bg-light-gray-bg z-0', {
 		'bg-white': isAuthPage,
@@ -20,7 +19,7 @@ function App() {
 	return (
 		<div className={appClasses}>
 			{!isAuthPage && <HeaderContainer />}
-			{mainPage && <ImagesBackground />}
+			{homePage && <ImagesBackground />}
 			<main className='max-w-[1380px] mx-auto flex flex-col'>
 				<Outlet />
 			</main>

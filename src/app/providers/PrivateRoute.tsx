@@ -10,5 +10,5 @@ export const PrivateRoute = () => {
 		return <PageLoader />
 	}
 
-	return user ? <Outlet /> : <Navigate to={ROUTES.HOME} replace />
+	return user ? <Outlet /> : <Navigate to={ROUTES.LOGIN} replace />
 }
