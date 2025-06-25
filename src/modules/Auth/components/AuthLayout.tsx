@@ -6,7 +6,7 @@ import {
 	CardFooter,
 	CardHeader,
 	CardTitle,
-} from '@/shared/ui/card'
+} from '@/shared/ui/Card'
 
 import { ReactNode } from 'react'
 
@@ -29,14 +29,14 @@ export const AuthLayout = ({
 	return (
 		<div
 			className={clsx(
-				'flex justify-center items-center mx-auto pt-[50px]',
+				'flex flex-col justify-center items-center mx-auto pt-[50px]',
 				className
 			)}
 			{...props}
 		>
+			<CardTitle className='text-center text-xl'>{title}</CardTitle>
 			<Card className='w-[400px]'>
 				<CardHeader>
-					<CardTitle>{title}</CardTitle>
 					<CardDescription>{description}</CardDescription>
 				</CardHeader>
 				<CardContent>{form}</CardContent>

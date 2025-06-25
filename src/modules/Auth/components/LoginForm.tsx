@@ -4,6 +4,7 @@ import { ROUTES } from '@/shared/routes/routes'
 import { Button } from '@/shared/ui/Button'
 import { Label } from '@/shared/ui/Label'
 import { Input } from '@/shared/ui/Input'
+import GoogleIcon from '@/shared/assets/icons/google.svg?react'
 import { useAuth } from '../hooks/useAuth'
 import { useEffect, useState } from 'react'
 
@@ -19,21 +20,19 @@ export const LoginForm = () => {
 		authError,
 		loginError,
 		loginGoogleError,
-		resetPasswordError,
 	} = useAuth()
 
 	const navigate = useNavigate()
 	const currentError = (authError ||
 		loginError ||
-		loginGoogleError ||
-		resetPasswordError) as string | null
+		loginGoogleError ) as string | null
 
 	const [email, setEmail] = useState('test@test.com')
 	const [password, setPassword] = useState('qwerty')
 
 	useEffect(() => {
 		if (user && !isAuthLoading) {
-			navigate(ROUTES.DASHBOARD)
+			navigate(ROUTES.HOME)
 		}
 		clearAuthError()
 	}, [user, isAuthLoading, navigate, clearAuthError])
@@ -90,22 +89,30 @@ export const LoginForm = () => {
 								onChange={e => setPassword(e.target.value)}
 							/>
 						</div>
+
 						{currentError && (
 							<p className='text-red-500 text-sm'>{currentError}</p>
 						)}
-						<div className='flex flex-col gap-3'>
-							<Button type='submit' className='w-full' disabled={isLoggingIn}>
-								{isLoggingIn ? 'Загрузка...' : 'Войти'}
-							</Button>
-							<Button
-								variant='outline'
-								className='w-full'
-								onClick={handleGoogleLogin}
-								disabled={isLoggingInGoogle}
-							>
-								{isLoggingIn ? 'Загрузка...' : 'Продолжить с Google'}
-							</Button>
+
+						<Button type='submit' className='w-full' disabled={isLoggingIn}>
+							{isLoggingIn ? 'Загрузка...' : 'Войти'}
+						</Button>
+
+						<div className='after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t'>
+							<span className='bg-background text-muted-foreground relative z-10 px-2'>
+								ИЛИ
+							</span>
 						</div>
+
+						<Button
+							variant='outline'
+							className='w-full flex items-center gap-3'
+							onClick={handleGoogleLogin}
+							disabled={isLoggingInGoogle}
+						>
+							<GoogleIcon className='mt-0.5' />
+							{isLoggingInGoogle ? 'Загрузка...' : 'Продолжить с Google'}
+						</Button>
 					</div>
 				</form>
 			}
