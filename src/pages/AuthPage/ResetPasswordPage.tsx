@@ -1,6 +1,7 @@
+import { ResetPasswordForm } from '@/modules/Auth'
 
 function ResetPasswordPage() {
-	return <div>ResetPasswordPage</div>
+	return <ResetPasswordForm />
 }
 
 export const Component = ResetPasswordPage
