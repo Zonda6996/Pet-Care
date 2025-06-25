@@ -1,9 +1,10 @@
 import Logo from '@/shared/assets/icons/logo.svg?react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { ROUTES } from '@/shared/routes/routes'
 import { Button } from '@/shared/ui/Button'
 import NavLink from '@/shared/ui/NavLink'
 import { AuthUser } from '@/modules/Auth'
+import clsx from 'clsx'
 
 interface HeaderProps {
 	user: AuthUser | null
@@ -12,8 +13,18 @@ interface HeaderProps {
 }
 
 export const Header = ({ user, isAuthLoading, onLogout }: HeaderProps) => {
+	const location = useLocation()
+	const homePage = location.pathname === ROUTES.HOME
+
+	const headerClass = clsx(
+		'flex justify-between items-center px-3 text-white w-full z-20 absolute top-0 left-0 right-0 h-[90px]',
+		{
+			'[&_a]:text-black bg-white/70': !homePage,
+		}
+	)
+
 	return (
-		<header className='flex justify-between items-center px-3 text-white w-full z-20 absolute top-0 left-0 right-0 h-[90px]'>
+		<header className={headerClass}>
 			<Link
 				className='flex items-center space-x-3 hover:opacity-80 transition-opacity '
 				to={ROUTES.HOME}
