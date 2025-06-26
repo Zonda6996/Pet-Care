@@ -1,11 +1,33 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
+@import 'swiper/css';
+@import 'swiper/css/pagination';
 
 @custom-variant dark (&:is(.dark *));
 
 @theme {
 	--color-light-gray: #b4b5b830;
 	--color-light-gray-bg: #f5f5f5;
+
+	--color-indigo-light: #b1c2ff;
+	--color-indigo-medium: #636dc3;
+	--color-indigo-strong: #5b63df;
+
+	--color-yellow-light: #fbffb1;
+	--color-yellow-medium: #cccc5d;
+	--color-yellow-strong: #dfdc5b;
+
+	--color-brown-light: #ba9f8d;
+	--color-brown-medium: #8e7a69;
+	--color-brown-strong: #574d3d;
+
+	--color-green-light: #b1c79b;
+	--color-green-medium: #6c8354;
+	--color-green-strong: #2b4413;
+
+	--color-terra-700: #a7724c;
+	--color-terra-600: #a77c5e;
+	--color-terra-200: #a49b99;
 	/* --color-light-gray: #b4b5b850; */
 }
 

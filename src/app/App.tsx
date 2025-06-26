@@ -20,7 +20,7 @@ function App() {
 		<div className={appClasses}>
 			{!isAuthPage && <HeaderContainer />}
 			{homePage && <ImagesBackground />}
-			<main className='max-w-[1380px] mx-auto flex flex-col'>
+			<main className='mx-auto flex flex-col'>
 				<Outlet />
 			</main>
 		</div>

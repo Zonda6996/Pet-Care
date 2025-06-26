@@ -19,7 +19,7 @@ export const Header = ({ user, isAuthLoading, onLogout }: HeaderProps) => {
 	const headerClass = clsx(
 		'flex justify-between items-center px-3 text-white w-full z-20 absolute top-0 left-0 right-0 h-[90px]',
 		{
-			'[&_a]:text-black bg-white/70': !homePage,
+			'[&_a]:text-black bg-white': !homePage,
 		}
 	)
 
