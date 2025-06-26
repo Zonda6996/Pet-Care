@@ -1,5 +1,7 @@
+import { ROUTES } from '@/shared/routes/routes'
 import { Button } from '@/shared/ui/Button'
 import { PawPrintIcon, WrenchIcon } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 export const HeroSection = () => {
 	return (
@@ -16,7 +18,7 @@ export const HeroSection = () => {
 			</div>
 			<div className='flex mt-10  items-center justify-center gap-10'>
 				<Button className='w-full py-6 shadow-xs max-w-[180px] hover:scale-105 duration-400 leading-tight'>
-					Выбрать животное
+					<Link to={ROUTES.CHOOSE_ANIMAL}>Выбрать животное</Link>
 					<PawPrintIcon />
 				</Button>
 
