@@ -41,6 +41,11 @@ export const router = createBrowserRouter([
 					import('@/pages/ChooseAnimalPage/ChooseAnimalCategoryPage.tsx'),
 			},
 			{
+				path: ROUTES.CHOOSE_ANIMAL_SPECIES,
+				hydrateFallbackElement: <PageLoader />,
+				lazy: () => import('@/pages/AnimalFormPage/AnimalFormPage'),
+			},
+			{
 				path: '*',
 				HydrateFallback: () => null,
 				lazy: () => import('@/pages/NotFoundPage/NotFoundPage.tsx'),
