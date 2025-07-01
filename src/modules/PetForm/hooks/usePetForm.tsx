@@ -7,12 +7,10 @@ export const usePetForm = () => {
 		resolver: zodResolver(petFormSchema),
 		defaultValues: {
 			petname: '',
-			breed: '',
 			age: {
 				months: 0,
 				years: 0,
 			},
-			dob: undefined,
 		},
 	})
 

@@ -9,7 +9,7 @@ const initialState: PetData = {
 		months: 0,
 		years: 0,
 	},
-	dob: null,
+	dob: '',
 }
 
 const petSlice = createSlice({
