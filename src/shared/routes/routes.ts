@@ -1,4 +1,5 @@
 import 'react-router-dom'
+import { PetSpeciesType } from '../constants/breeds'
 
 export const ROUTES = {
 	HOME: '/',
@@ -8,11 +9,16 @@ export const ROUTES = {
 	RESET_PASSWORD: '/reset-password',
 	CHOOSE_ANIMAL: '/choose-animal',
 	CHOOSE_ANIMAL_CATEGORY: '/choose-animal/:category',
+	CHOOSE_ANIMAL_SPECIES: '/choose-animal/:category/:species',
 } as const
 
 export type PathParams = {
 	[ROUTES.CHOOSE_ANIMAL_CATEGORY]: {
 		category: string
+	}
+	[ROUTES.CHOOSE_ANIMAL_SPECIES]: {
+		category: string
+		species: PetSpeciesType
 	}
 }
 
