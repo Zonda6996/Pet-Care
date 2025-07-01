@@ -4,6 +4,8 @@ import catSlider from '@/shared/assets/images/catSlider.webp'
 import dogSlider from '@/shared/assets/images/dogSlider.webp'
 import hamsterSlider from '@/shared/assets/images/hamsterSlider.webp'
 import { DomesticAnimalSlide } from './DomesticAnimalSlider'
+import { ROUTES } from '@/shared/routes/routes'
+import { href } from 'react-router-dom'
 
 export const DomesticAnimals = () => {
 	return (
@@ -33,6 +35,10 @@ export const DomesticAnimals = () => {
 						alt='Кот'
 						slideClassName='from-brown-light! to-brown-strong'
 						buttonClassName='bg-brown-medium hover:bg-brown-light'
+						route={href(ROUTES.CHOOSE_ANIMAL_SPECIES, {
+							category: 'domestic',
+							species: 'cat',
+						})}
 					/>
 				</SwiperSlide>
 				<SwiperSlide>
@@ -44,6 +50,10 @@ export const DomesticAnimals = () => {
 						alt='Собака'
 						slideClassName='from-green-light to-green-strong'
 						buttonClassName='bg-green-medium hover:bg-green-light'
+						route={href(ROUTES.CHOOSE_ANIMAL_SPECIES, {
+							category: 'domestic',
+							species: 'dog',
+						})}
 					/>
 				</SwiperSlide>
 				<SwiperSlide>
@@ -55,6 +65,10 @@ export const DomesticAnimals = () => {
 						alt='Хомяк'
 						slideClassName='from-terra-700 to-terra-200'
 						buttonClassName='bg-terra-600 hover:bg-terra-700'
+						route={href(ROUTES.CHOOSE_ANIMAL_SPECIES, {
+							category: 'domestic',
+							species: 'hamster',
+						})}
 					/>
 				</SwiperSlide>
 				<SwiperSlide>
@@ -63,6 +77,7 @@ export const DomesticAnimals = () => {
 						description=''
 						buttonClassName='hidden'
 						alt='Placeholder'
+						route=''
 					/>
 				</SwiperSlide>
 			</Swiper>

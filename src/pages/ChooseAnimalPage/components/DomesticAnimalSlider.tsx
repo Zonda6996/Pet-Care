@@ -2,6 +2,7 @@ import { Button } from '@/shared/ui/Button'
 import { ReactNode } from 'react'
 import clsx from 'clsx'
 import imgSliderPlaceholder from '@/shared/assets/svg/imgSliderPlaceholder.svg'
+import { Link } from 'react-router-dom'
 
 interface DomesticAnimalSlideProps {
 	slideClassName?: string
@@ -10,6 +11,7 @@ interface DomesticAnimalSlideProps {
 	buttonClassName?: string
 	imgURL?: string
 	alt: string
+	route: string
 }
 
 export const DomesticAnimalSlide = ({
@@ -17,6 +19,7 @@ export const DomesticAnimalSlide = ({
 	imgURL,
 	alt,
 	title,
+	route,
 	buttonClassName,
 	slideClassName,
 }: DomesticAnimalSlideProps) => {
@@ -34,15 +37,17 @@ export const DomesticAnimalSlide = ({
 					</p>
 
 					<p className='max-w-[400px] font-light text-white'>{description}</p>
-					<Button
-						size='lg'
-						className={clsx(
-							'bg-gray-500 w-[150px] hover:bg-gray-400',
-							buttonClassName
-						)}
-					>
-						Выбрать
-					</Button>
+					<Link to={route}>
+						<Button
+							size='lg'
+							className={clsx(
+								'bg-gray-500 w-[150px] hover:bg-gray-400',
+								buttonClassName
+							)}
+						>
+							Выбрать
+						</Button>
+					</Link>
 				</div>
 				<img
 					className='w-[280px] min-h-[420px] object-cover rounded-full shadow-2xl/50 hover:scale-105 transition-transform duration-500'
