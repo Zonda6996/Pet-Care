@@ -1,28 +1,60 @@
 import { Form } from '@/shared/ui/Form'
-import { PetFormSchema } from '../schemas/schema'
 import { Button } from '@/shared/ui/Button'
-import { FormName } from './FormComponents/FormName'
-import { FormGender } from './FormComponents/FormGender'
-import { FormBreedCommon } from './FormComponents/FormBreedCommon'
-import { FormAge } from './FormComponents/FormAge'
-import { FormDate } from './FormComponents/FormDate'
-import { PetSpeciesType } from '@/shared/constants/breeds'
+import { Loader2Icon } from 'lucide-react'
+import {
+	FormAge,
+	FormBreedCommon,
+	FormDate,
+	FormName,
+	FormGender,
+} from './FormComponents'
+
+import { useEffect, useState } from 'react'
 import { usePetForm } from '../hooks/usePetForm'
 import { useAppDispatch } from '@/store/hooks'
+import { useAuth } from '@/modules/Auth'
+import { useNavigate } from 'react-router-dom'
+
+import { PetFormSchema } from '../schemas/schema'
+import { PetSpeciesType } from '@/shared/constants/breeds'
 import { setPetData } from '../store/reducer'
+import { savePetToFirestore } from '../api/petFirestore'
+import { ROUTES } from '@/shared/routes/routes'
 
 export const PetForm = ({ species }: { species: PetSpeciesType }) => {
+	const [error, setError] = useState('')
+	const navigate = useNavigate()
 	const form = usePetForm()
+	const {
+		formState: { isSubmitting, isSubmitSuccessful },
+	} = form
 	const dispatch = useAppDispatch()
+	const { user } = useAuth()
 
-	const handleSumbit = (values: PetFormSchema) => {
-		const payload = {
-			...values,
-			dob: values.dob.toISOString(),
+	const handleSumbit = async (values: PetFormSchema) => {
+		try {
+			const payload = {
+				...values,
+				dob: values.dob.toISOString(),
+			}
+			dispatch(setPetData(payload))
+
+			if (user?.uid) {
+				await savePetToFirestore(values, user.uid)
+			}
+			setError('')
+		} catch (err) {
+			setError('Не удалось сохранить данные. Попробуйте позже.')
+			console.error('Save data error:', err)
 		}
-		dispatch(setPetData(payload))
-		console.log('Сохранено в Redux:', payload)
 	}
+
+	useEffect(() => {
+		if (isSubmitSuccessful) {
+			form.reset()
+			navigate(ROUTES.DASHBOARD, { replace: true })
+		}
+	}, [isSubmitSuccessful])
 
 	return (
 		<div className='pt-[120px] py-5 px-5 mx-auto'>
@@ -39,7 +71,11 @@ export const PetForm = ({ species }: { species: PetSpeciesType }) => {
 					<FormBreedCommon species={species} />
 					<FormAge />
 					<FormDate />
-					<Button>Продолжить</Button>
+					{error && <p className='text-red-500 text-sm'>{error}</p>}
+					<Button className='w-[150px]' disabled={isSubmitting}>
+						{isSubmitting && <Loader2Icon className='animate-spin' />}
+						{isSubmitting ? 'Сохранение' : 'Продолжить'}
+					</Button>
 				</form>
 			</Form>
 		</div>
