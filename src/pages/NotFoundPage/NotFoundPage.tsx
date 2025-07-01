@@ -3,7 +3,7 @@ import { Button } from '@/shared/ui/Button'
 import { ArrowRightIcon } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
-function NotFoundPage() {
+export const NotFoundPage = () => {
 	return (
 		<div className='pt-[140px] text-center space-y-5'>
 			<div className='flex flex-col gap-3'>
