@@ -7,7 +7,7 @@ import {
 	GoogleAuthProvider,
 	sendPasswordResetEmail as fbSendPasswordResetEmail,
 } from 'firebase/auth'
-import { auth } from './firebase'
+import { auth } from '@/shared/api/firebase'
 import { handleAuthError } from './error-handlers'
 
 const googleProvider = new GoogleAuthProvider()

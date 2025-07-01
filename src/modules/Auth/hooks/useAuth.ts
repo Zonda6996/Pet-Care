@@ -11,7 +11,7 @@ import {
 import { useEffect } from 'react'
 import { cleanError, setError, setLoading, setUser } from '../store/reducer'
 import { onAuthStateChanged, User as FirebaseUser } from 'firebase/auth'
-import { auth } from '../api/firebase'
+import { auth } from '@/shared/api/firebase'
 import { AuthUser } from '../types/auth'
 import { selectError, selectIsLoading, selectUser } from '../store/selectors'
 import { useNavigate } from 'react-router-dom'
