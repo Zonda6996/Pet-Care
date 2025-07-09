@@ -38,7 +38,7 @@ export const Header = ({ user, isAuthLoading, onLogout }: HeaderProps) => {
 				<ul className='flex gap-6 font-extrabold'>
 					<NavLink route={ROUTES.HOME}>Услуги</NavLink>
 					<NavLink route={ROUTES.HOME}>Ветклиники</NavLink>
-					<NavLink className='text-secondary' route={ROUTES.HOME}>
+					<NavLink className='text-secondary' route={ROUTES.CHOOSE_ANIMAL}>
 						+ Добавить питомца
 					</NavLink>
 					<NavLink route={ROUTES.HOME}>О нас</NavLink>

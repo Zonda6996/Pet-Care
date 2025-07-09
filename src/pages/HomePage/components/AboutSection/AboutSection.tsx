@@ -1,6 +1,8 @@
 import cat from '@/shared/assets/images/cat.webp'
 import catAndHorse from '@/shared/assets/images/catAndHorse.webp'
+import { ROUTES } from '@/shared/routes/routes'
 import { Button } from '@/shared/ui/Button'
+import { Link } from 'react-router-dom'
 
 export const AboutSection = () => {
 	return (
@@ -59,7 +61,9 @@ export const AboutSection = () => {
 					<br /> Если вы так же любите своих питомцев, как и мы — вы точно по
 					адресу.
 				</p>
-				<Button className='text-lg py-6'>Начать знакомство</Button>
+				<Link to={ROUTES.CHOOSE_ANIMAL}>
+					<Button className='text-lg py-6'>Начать знакомство</Button>
+				</Link>
 			</div>
 		</section>
 	)
