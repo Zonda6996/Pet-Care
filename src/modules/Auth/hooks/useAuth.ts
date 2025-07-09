@@ -9,10 +9,7 @@ import {
 	authApi,
 } from '../api/authApi'
 import { useEffect } from 'react'
-import { cleanError, setError, setLoading, setUser } from '../store/reducer'
-import { onAuthStateChanged, User as FirebaseUser } from 'firebase/auth'
-import { auth } from '@/shared/api/firebase'
-import { AuthUser } from '../types/auth'
+import { cleanError, setError } from '../store/reducer'
 import { selectError, selectIsLoading, selectUser } from '../store/selectors'
 import { useNavigate } from 'react-router-dom'
 import { ROUTES } from '@/shared/routes/routes'
@@ -40,40 +37,6 @@ export const useAuth = () => {
 		resetPassword,
 		{ isLoading: isResettingPassword, error: resetPasswordError },
 	] = useResetPasswordMutation()
-
-	useEffect(() => {
-		dispatch(setLoading(true))
-
-		const unsubscribe = onAuthStateChanged(
-			auth,
-			(firebaseUser: FirebaseUser | null) => {
-				if (firebaseUser) {
-					const serializableUser: AuthUser = {
-						uid: firebaseUser.uid,
-						email: firebaseUser.email,
-						displayName: firebaseUser.displayName,
-						photoURL: firebaseUser.photoURL,
-						emailVerified: firebaseUser.emailVerified,
-					}
-					dispatch(setUser(serializableUser))
-				} else {
-					dispatch(setUser(null))
-				}
-				dispatch(setLoading(false))
-			},
-			firebaseError => {
-				console.error('Error in onAuthStateChanged:', firebaseError)
-				dispatch(
-					setError(
-						(firebaseError as Error).message ||
-							'Ошибка отслеживания статуса аутентификации.'
-					)
-				)
-				dispatch(setLoading(false))
-			}
-		)
-		return () => unsubscribe()
-	}, [dispatch])
 
 	useEffect(() => {
 		const firstError =
