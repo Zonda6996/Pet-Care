@@ -1,12 +1,13 @@
-import { Gender } from '../schemas/schema'
-
-export interface PetData {
+export type FetchedPetData = {
+	id: string
+	userId: string
+	createdAt: string
 	petname: string
-	gender: Gender
 	breed: string
+	dob: string
 	age: {
 		years: number
 		months: number
 	}
-	dob: string
+	gender: string
 }

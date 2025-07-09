@@ -18,8 +18,8 @@ import { useNavigate } from 'react-router-dom'
 import { PetFormSchema } from '../schemas/schema'
 import { PetSpeciesType } from '@/shared/constants/breeds'
 import { setPetData } from '../store/reducer'
-import { savePetToFirestore } from '../api/petFirestore'
 import { ROUTES } from '@/shared/routes/routes'
+import { useSavePetMutation } from '../api/petsApi'
 
 export const PetForm = ({ species }: { species: PetSpeciesType }) => {
 	const [error, setError] = useState('')
@@ -30,6 +30,7 @@ export const PetForm = ({ species }: { species: PetSpeciesType }) => {
 	} = form
 	const dispatch = useAppDispatch()
 	const { user } = useAuth()
+	const [savePet] = useSavePetMutation()
 
 	const handleSumbit = async (values: PetFormSchema) => {
 		try {
@@ -40,7 +41,7 @@ export const PetForm = ({ species }: { species: PetSpeciesType }) => {
 			dispatch(setPetData(payload))
 
 			if (user?.uid) {
-				await savePetToFirestore(values, user.uid)
+				await savePet({ data: values, userId: user.uid })
 			}
 			setError('')
 		} catch (err) {
