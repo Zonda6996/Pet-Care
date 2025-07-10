@@ -30,7 +30,7 @@ export const FormBreedCommon = ({ species }: FormBreedCommonProps) => {
 			control={form.control}
 			render={({ field }) => (
 				<FormItem className='flex flex-col items-center justify-center'>
-					<FormLabel className=''>Порода питомца</FormLabel>
+					<FormLabel>Порода питомца</FormLabel>
 					<Select onValueChange={field.onChange} defaultValue={field.value}>
 						<FormControl>
 							<SelectTrigger>
