@@ -20,6 +20,7 @@ export const petsApi = createApi({
 					})) as FetchedPetData[]
 					return { data: pets }
 				} catch (error: unknown) {
+					console.error('Ошибка при получении питомцев', error)
 					const errorMessage =
 						error instanceof Error ? error.message : 'Неизвестная ошибка.'
 					return { error: errorMessage }
@@ -33,17 +34,13 @@ export const petsApi = createApi({
 					  ]
 					: [{ type: 'Pets', id: 'LIST' }],
 		}),
-		savePet: builder.mutation<void, { data: PetFormSchema; userId: string }>({
-			async queryFn({ data, userId }) {
+		savePet: builder.mutation<void, { payload: FetchedPetData }>({
+			async queryFn({ payload }) {
 				try {
-					await addDoc(collection(db, 'pets'), {
-						...data,
-						dob: data.dob.toISOString(),
-						userId,
-						createdAt: new Date().toISOString(),
-					})
+					await addDoc(collection(db, 'pets'), payload)
 					return { data: undefined }
 				} catch (error: unknown) {
+					console.error('Ошибка при сохранении в Firestore:', error)
 					const errorMessage =
 						error instanceof Error ? error.message : 'Неизвестная ошибка.'
 					return { error: errorMessage }
