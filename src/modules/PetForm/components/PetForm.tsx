@@ -31,18 +31,27 @@ export const PetForm = ({ species }: { species: PetSpeciesType }) => {
 	const dispatch = useAppDispatch()
 	const { user } = useAuth()
 	const [savePet] = useSavePetMutation()
+	console.log(species)
 
 	const handleSumbit = async (values: PetFormSchema) => {
 		try {
+			if (!user?.uid) {
+				console.error('User is not defined')
+				return
+			}
+
 			const payload = {
 				...values,
+				userId: user?.uid,
+				type: species,
 				dob: values.dob.toISOString(),
+				createdAt: new Date().toISOString(),
 			}
-			dispatch(setPetData(payload))
 
-			if (user?.uid) {
-				await savePet({ data: values, userId: user.uid })
-			}
+			await savePet({ payload })
+			dispatch(setPetData(payload))
+			console.log(payload)
+
 			setError('')
 		} catch (err) {
 			setError('Не удалось сохранить данные. Попробуйте позже.')

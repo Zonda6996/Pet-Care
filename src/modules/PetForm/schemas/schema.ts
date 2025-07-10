@@ -1,4 +1,7 @@
 import { z } from 'zod'
+import { breeds } from '@/shared/constants/breeds'
+
+const speciesList = Object.keys(breeds) as [keyof typeof breeds]
 
 const genderEnum = z.enum(['Мужской', 'Женский'], {
 	required_error: 'Выберите пол питомца',
@@ -9,6 +12,7 @@ export const petFormSchema = z.object({
 		.string()
 		.min(2, 'Имя должно содержать минимум 2 символа')
 		.max(20, 'Имя не должно быть длиннее 20 символов'),
+	type: z.enum(speciesList).optional(),
 	age: z.object({
 		years: z
 			.number({

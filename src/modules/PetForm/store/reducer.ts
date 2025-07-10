@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { PetData } from '../types/types'
+import { PetDataSlice } from '../types/types'
 
-const initialState: PetData = {
+const initialState: PetDataSlice = {
 	petname: '',
 	gender: 'Мужской',
 	breed: '',
@@ -10,13 +10,14 @@ const initialState: PetData = {
 		years: 0,
 	},
 	dob: '',
+	type: 'unknown',
 }
 
 const petSlice = createSlice({
 	name: 'pet',
 	initialState,
 	reducers: {
-		setPetData(state, action: PayloadAction<PetData>) {
+		setPetData(state, action: PayloadAction<PetDataSlice>) {
 			return action.payload
 		},
 	},
