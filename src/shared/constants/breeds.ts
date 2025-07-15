@@ -32,4 +32,11 @@ export const breeds = {
 	unknown: ['Неизвестно', 'Другая'],
 }
 
+export const petTypeMap: Record<PetSpeciesType, string> = {
+	cat: 'Кот',
+	dog: 'Собака',
+	hamster: 'Хомяк',
+	unknown: 'Неизвестно',
+}
+
 export type PetSpeciesType = keyof typeof breeds

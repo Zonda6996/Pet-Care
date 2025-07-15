@@ -1,9 +1,9 @@
-import { PetInfo } from '@/modules/PetForm'
+import { PetList } from '@/modules/PetForm'
 
 function DashboardPage() {
 	return (
 		<div className='pt-[120px] text-center font-bold text-2xl'>
-			<PetInfo />
+			<PetList />
 		</div>
 	)
 }
