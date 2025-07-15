@@ -1,8 +1,16 @@
 import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react'
 import { FetchedPetData } from '../types/types'
-import { addDoc, collection, getDocs, query, where } from 'firebase/firestore'
+import {
+	addDoc,
+	collection,
+	deleteDoc,
+	doc,
+	getDocs,
+	query,
+	updateDoc,
+	where,
+} from 'firebase/firestore'
 import { db } from '@/shared/api/firebase'
-import { PetFormSchema } from '../schemas/schema'
 
 export const petsApi = createApi({
 	reducerPath: 'petsApi',
@@ -48,7 +56,43 @@ export const petsApi = createApi({
 			},
 			invalidatesTags: [{ type: 'Pets', id: 'LIST' }],
 		}),
+		deletePet: builder.mutation<void, string>({
+			async queryFn(petId) {
+				try {
+					await deleteDoc(doc(db, 'pets', petId))
+					return { data: undefined }
+				} catch (error: unknown) {
+					console.error('Ошибка при удалении данных:', error)
+					const errorMessage =
+						error instanceof Error ? error.message : 'Неизвестная ошибка.'
+					return { error: errorMessage }
+				}
+			},
+			invalidatesTags: [{ type: 'Pets', id: 'LIST' }],
+		}),
+		updatePet: builder.mutation<
+			void,
+			{ id: string; data: Partial<FetchedPetData> }
+		>({
+			async queryFn({ id, data }) {
+				try {
+					const docRef = doc(db, 'pets', id)
+					await updateDoc(docRef, data)
+					return { data: undefined }
+				} catch (error: unknown) {
+					console.error('Ошибка при обновлении данных:', error)
+					const errorMessage =
+						error instanceof Error ? error.message : 'Неизвестная ошибка.'
+					return { error: errorMessage }
+				}
+			},
+			invalidatesTags: (result, error, { id }) => [
+				{ type: 'Pets', id },
+				{ type: 'Pets', id: 'LIST' },
+			],
+		}),
 	}),
 })
 
-export const { useGetUserPetsQuery, useSavePetMutation } = petsApi
+export const { useGetUserPetsQuery, useSavePetMutation, useDeletePetMutation, useUpdatePetMutation } =
+	petsApi
